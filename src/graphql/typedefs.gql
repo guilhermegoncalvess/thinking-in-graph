@@ -1,0 +1,44 @@
+type Query {
+  hello: String
+  users: [User]
+  user(id: Int!): User
+  posts: [Post]
+  followers(id: Int!): Followers
+}
+
+type Mutation {
+  user(input: UserInput!): User!
+  follow(input: FollowInput!): String!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+}
+
+input FollowInput {
+  followerId: Int!
+  wantFollow: Int!
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  followedBy: [User]
+  posts: [Post]
+}
+
+type Post {
+  id: Int!
+  userId: Int!
+  likedBy: [User]!
+  description: String
+  image: String
+  totalLikes: Int
+}
+
+type Followers {
+  userId: Int
+  followedBy: [Int]
+}
